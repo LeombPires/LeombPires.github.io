@@ -55,651 +55,180 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
+    position: fixed; top: 0; width: 100%; z-index: 100;
     background: linear-gradient(180deg, rgba(26,58,42,0.97) 0%, rgba(26,58,42,0.85) 100%);
     backdrop-filter: blur(8px);
     border-bottom: 2px solid var(--amber-dim);
     padding: 0.6rem 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    display: flex; justify-content: center; gap: 2rem;
+    font-family: 'Cinzel', serif; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
   }
-
-  nav a {
-    color: var(--parchment-dark);
-    text-decoration: none;
-    padding: 0.3rem 0;
-    position: relative;
-    transition: color 0.3s;
-  }
-
-  nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: var(--amber-glow);
-    transition: width 0.3s;
-  }
-
+  nav a { color: var(--parchment-dark); text-decoration: none; padding: 0.3rem 0; position: relative; transition: color 0.3s; }
+  nav a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--amber-glow); transition: width 0.3s; }
   nav a:hover { color: var(--amber-glow); }
   nav a:hover::after { width: 100%; }
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; position: relative; padding: 2rem;
     background:
       radial-gradient(ellipse at 30% 20%, rgba(107,143,78,0.15) 0%, transparent 50%),
       radial-gradient(ellipse at 70% 80%, rgba(200,149,46,0.1) 0%, transparent 50%),
       linear-gradient(180deg, #0f261a 0%, var(--forest-deep) 40%, #162e22 100%);
-    position: relative;
-    padding: 2rem;
   }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--parchment)); }
 
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(to bottom, transparent, var(--parchment));
-  }
-
-  /* decorative vines */
-  .vine-left, .vine-right {
-    position: absolute;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    opacity: 0.12;
-    pointer-events: none;
-  }
+  .vine-left, .vine-right { position: absolute; top: 0; width: 120px; height: 100%; opacity: 0.12; pointer-events: none; }
   .vine-left { left: 2%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 800'%3E%3Cpath d='M50 0 C30 100 70 200 40 300 C10 400 80 500 50 600 C20 700 60 800 50 800' stroke='%234a8c5e' fill='none' stroke-width='3'/%3E%3Ccircle cx='35' cy='150' r='12' fill='%234a8c5e' opacity='0.5'/%3E%3Ccircle cx='65' cy='350' r='10' fill='%234a8c5e' opacity='0.4'/%3E%3Ccircle cx='30' cy='550' r='14' fill='%234a8c5e' opacity='0.3'/%3E%3C/svg%3E") no-repeat center / contain; }
   .vine-right { right: 2%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 800'%3E%3Cpath d='M50 0 C70 100 30 200 60 300 C90 400 20 500 50 600 C80 700 40 800 50 800' stroke='%234a8c5e' fill='none' stroke-width='3'/%3E%3Ccircle cx='65' cy='200' r='11' fill='%234a8c5e' opacity='0.5'/%3E%3Ccircle cx='35' cy='400' r='13' fill='%234a8c5e' opacity='0.4'/%3E%3Ccircle cx='70' cy='650' r='10' fill='%234a8c5e' opacity='0.3'/%3E%3C/svg%3E") no-repeat center / contain; }
 
-  .hero-emblem {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--amber);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    background: radial-gradient(circle, rgba(200,149,46,0.15), transparent);
-    animation: pulse-glow 3s ease-in-out infinite;
-    font-size: 2rem;
-  }
+  .hero-emblem { width: 80px; height: 80px; border: 2px solid var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; background: radial-gradient(circle, rgba(200,149,46,0.15), transparent); animation: pulse-glow 3s ease-in-out infinite; font-size: 2rem; }
+  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(200,149,46,0.2); } 50% { box-shadow: 0 0 40px rgba(200,149,46,0.4); } }
 
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(200,149,46,0.2); }
-    50% { box-shadow: 0 0 40px rgba(200,149,46,0.4); }
-  }
+  .hero h1 { font-family: 'Cinzel Decorative', serif; font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--parchment); letter-spacing: 0.06em; text-shadow: 0 2px 20px rgba(200,149,46,0.3); margin-bottom: 0.5rem; }
+  .hero-subtitle { font-family: 'Cinzel', serif; font-size: clamp(0.9rem, 2vw, 1.15rem); color: var(--amber-glow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem; }
+  .hero-tagline { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1.15rem; color: rgba(244,236,216,0.7); max-width: 500px; line-height: 1.6; }
+  .scroll-hint { position: absolute; bottom: 140px; animation: bob 2s ease-in-out infinite; color: var(--amber); font-size: 1.5rem; z-index: 2; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
-  .hero h1 {
-    font-family: 'Cinzel Decorative', serif;
-    font-weight: 700;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    color: var(--parchment);
-    letter-spacing: 0.06em;
-    text-shadow: 0 2px 20px rgba(200,149,46,0.3);
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-subtitle {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: var(--amber-glow);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-
-  .hero-tagline {
-    font-family: 'Crimson Pro', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: rgba(244,236,216,0.7);
-    max-width: 500px;
-    line-height: 1.6;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 140px;
-    animation: bob 2s ease-in-out infinite;
-    color: var(--amber);
-    font-size: 1.5rem;
-    z-index: 2;
-  }
-
-  @keyframes bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-  }
-
-  /* ── SECTIONS (parchment) ── */
-  .parchment-bg {
-    background: var(--parchment);
-    position: relative;
-  }
-
-  section {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-
-  .section-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    color: var(--forest-deep);
-    text-align: center;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.05em;
-  }
-
-  .section-ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .section-ornament .line {
-    width: 60px;
-    height: 1px;
-    background: var(--amber);
-  }
-
-  .section-ornament .diamond {
-    width: 8px;
-    height: 8px;
-    background: var(--amber);
-    transform: rotate(45deg);
-  }
+  /* ── SECTIONS ── */
+  .parchment-bg { background: var(--parchment); position: relative; }
+  section { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; }
+  .section-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.5rem, 3.5vw, 2rem); color: var(--forest-deep); text-align: center; margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+  .section-ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; }
+  .section-ornament .line { width: 60px; height: 1px; background: var(--amber); }
+  .section-ornament .diamond { width: 8px; height: 8px; background: var(--amber); transform: rotate(45deg); }
 
   /* ── ABOUT ── */
-  .about-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--ink-soft);
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto;
-  }
+  .about-text { font-size: 1.1rem; line-height: 1.8; color: var(--ink-soft); text-align: center; max-width: 680px; margin: 0 auto; }
+  .about-text strong { color: var(--forest); font-weight: 600; }
+  .about-highlight { display: inline-block; background: linear-gradient(180deg, transparent 60%, rgba(200,149,46,0.2) 60%); }
 
-  .about-text strong {
-    color: var(--forest);
-    font-weight: 600;
-  }
-
-  .about-highlight {
-    display: inline-block;
-    background: linear-gradient(180deg, transparent 60%, rgba(200,149,46,0.2) 60%);
-  }
-
-  /* ── SKILLS (RPG stat bars) ── */
-  .forest-bg {
-    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 5%, var(--parchment-dark) 95%, var(--parchment) 100%);
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
-  @media (max-width: 600px) {
-    .skills-grid { grid-template-columns: 1fr; }
-  }
-
-  .skill-bar {
-    background: rgba(26,58,42,0.06);
-    border: 1px solid rgba(26,58,42,0.12);
-    border-radius: 6px;
-    padding: 0.9rem 1.1rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-bar .label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--forest-deep);
-    letter-spacing: 0.06em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .skill-bar .label .skill-tag {
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--bark-light);
-    font-style: italic;
-  }
-
-  .bar-track {
-    width: 100%;
-    height: 8px;
-    background: rgba(26,58,42,0.1);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-    width: 0;
-  }
-
+  /* ── SKILLS ── */
+  .forest-bg { background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 5%, var(--parchment-dark) 95%, var(--parchment) 100%); }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
+  .skill-bar { background: rgba(26,58,42,0.06); border: 1px solid rgba(26,58,42,0.12); border-radius: 6px; padding: 0.9rem 1.1rem; position: relative; overflow: hidden; }
+  .skill-bar .label { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--forest-deep); letter-spacing: 0.06em; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .skill-bar .label .skill-tag { font-family: 'Crimson Pro', serif; font-size: 0.75rem; font-weight: 400; color: var(--bark-light); font-style: italic; }
+  .bar-track { width: 100%; height: 8px; background: rgba(26,58,42,0.1); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); width: 0; }
   .bar-fill.green { background: linear-gradient(90deg, var(--forest), var(--moss-light)); }
   .bar-fill.amber { background: linear-gradient(90deg, var(--amber-dim), var(--amber-glow)); }
   .bar-fill.ruby  { background: linear-gradient(90deg, var(--bark), var(--bark-light)); }
 
-  /* ── QUEST LOG (Projects) ── */
-  .quest-card {
-    background: linear-gradient(135deg, rgba(26,58,42,0.04), rgba(200,149,46,0.04));
-    border: 2px solid var(--amber-dim);
-    border-radius: 8px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
+  /* ── QUEST LOG ── */
+  .quest-card { background: linear-gradient(135deg, rgba(26,58,42,0.04), rgba(200,149,46,0.04)); border: 2px solid var(--amber-dim); border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; }
+  .quest-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); }
+  .quest-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--forest-deep); color: var(--amber-glow); padding: 0.25rem 0.8rem; border-radius: 3px; margin-bottom: 1rem; }
+  .quest-title { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--forest-deep); margin-bottom: 0.3rem; }
+  .quest-subtitle { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--amber-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .quest-desc { font-size: 1.05rem; line-height: 1.7; color: var(--ink-soft); margin-bottom: 1.5rem; }
+  .quest-features { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .quest-card + .quest-card { margin-top: 2rem; }
 
-  .quest-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gold-gradient);
-  }
-
-  .quest-badge {
-    display: inline-block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: var(--forest-deep);
-    color: var(--amber-glow);
-    padding: 0.25rem 0.8rem;
-    border-radius: 3px;
-    margin-bottom: 1rem;
-  }
-
-  .quest-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.5rem;
-    color: var(--forest-deep);
-    margin-bottom: 0.3rem;
-  }
-
-  .quest-subtitle {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    color: var(--amber-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-  }
-
-  .quest-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    margin-bottom: 1.5rem;
-  }
-
-  .quest-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
+  /* ── Stone / Carved Tags ── */
   .quest-features .tag {
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: rgba(45,90,61,0.08);
-    color: var(--forest);
-    border: 1px solid rgba(45,90,61,0.2);
-    padding: 0.3rem 0.7rem;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.85rem;
     border-radius: 3px;
+    position: relative;
+    background:
+      linear-gradient(145deg, #c9bfa8 0%, #b5a88e 30%, #a89878 60%, #b5a88e 100%);
+    box-shadow:
+      inset 1px 1px 2px rgba(255,255,255,0.35),
+      inset -1px -1px 2px rgba(0,0,0,0.15),
+      1px 2px 4px rgba(26,20,12,0.2);
+    border: 1px solid rgba(140,125,100,0.4);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-
-  .quest-card + .quest-card {
-    margin-top: 2rem;
+  .quest-features .tag:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 1px 1px 2px rgba(255,255,255,0.35),
+      inset -1px -1px 2px rgba(0,0,0,0.15),
+      2px 3px 6px rgba(26,20,12,0.25);
   }
 
   /* ── Training Grounds ── */
-  .training-grounds {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(160,116,36,0.2);
-  }
-
-  .training-header {
-    text-align: center;
-    margin-bottom: 1.2rem;
-  }
-
-  .training-header .quest-badge {
-    margin-bottom: 0.5rem;
-  }
-
-  .training-subtitle {
-    font-family: 'Crimson Pro', serif;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    opacity: 0.7;
-  }
-
-  .training-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.8rem;
-  }
-
-  @media (max-width: 600px) {
-    .training-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .training-card {
-    background: rgba(26,58,42,0.04);
-    border: 1px solid rgba(160,116,36,0.15);
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
-    transition: border-color 0.3s;
-  }
-
-  .training-card:hover {
-    border-color: var(--amber);
-  }
-
-  .training-title {
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--forest-deep);
-    margin-bottom: 0.25rem;
-  }
-
-  .training-lang {
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.75rem;
-    color: var(--bark-light);
-    font-style: italic;
-  }
+  .training-grounds { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(160,116,36,0.2); }
+  .training-header { text-align: center; margin-bottom: 1.2rem; }
+  .training-header .quest-badge { margin-bottom: 0.5rem; }
+  .training-subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.9rem; color: var(--ink-soft); opacity: 0.7; }
+  .training-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+  @media (max-width: 600px) { .training-grid { grid-template-columns: repeat(2, 1fr); } }
+  .training-card { background: rgba(26,58,42,0.04); border: 1px solid rgba(160,116,36,0.15); border-radius: 6px; padding: 0.6rem; text-align: center; transition: border-color 0.3s; }
+  .training-card:hover { border-color: var(--amber); }
+  .training-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 4px; overflow: hidden; margin-bottom: 0.5rem; background: linear-gradient(135deg, rgba(26,58,42,0.08), rgba(200,149,46,0.06)); display: flex; align-items: center; justify-content: center; }
+  .training-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .training-thumb .thumb-placeholder { font-size: 1.8rem; opacity: 0.3; }
+  .training-title { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--forest-deep); margin-bottom: 0.25rem; }
+  .training-lang { font-family: 'Crimson Pro', serif; font-size: 0.75rem; color: var(--bark-light); font-style: italic; }
 
   /* ── Demo Embeds ── */
-  .demo-embed {
-    margin-top: 1.5rem;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 2px solid var(--amber-dim);
-    background: var(--forest-deep);
-  }
+  .demo-embed { margin-top: 1.5rem; border-radius: 6px; overflow: hidden; border: 2px solid var(--amber-dim); background: var(--forest-deep); }
+  .demo-embed iframe { display: block; width: 100%; height: 100%; border: none; }
+  .demo-embed.square { max-width: 600px; aspect-ratio: 1 / 1; margin-left: auto; margin-right: auto; }
+  .demo-embed.wide { width: 100%; aspect-ratio: 16 / 9; }
 
-  .demo-embed iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .demo-embed.square {
-    max-width: 600px;
-    aspect-ratio: 1 / 1;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .demo-embed.wide {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-
-  /* ── Video / Media Placeholder ── */
-  .media-placeholder {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, var(--forest-deep), #0f261a);
-    border-radius: 6px;
-    border: 2px dashed var(--amber-dim);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--amber-glow);
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-  }
-
+  /* ── Media Placeholder ── */
+  .media-placeholder { width: 100%; aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--forest-deep), #0f261a); border-radius: 6px; border: 2px dashed var(--amber-dim); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--amber-glow); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.1em; gap: 0.5rem; margin-top: 1.5rem; }
   .media-placeholder .icon { font-size: 2rem; opacity: 0.6; }
+  .media-placeholder span { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.85rem; color: rgba(232,184,74,0.6); }
 
-  .media-placeholder span {
-    font-family: 'Crimson Pro', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    color: rgba(232,184,74,0.6);
-  }
-
-  .quest-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--forest);
-    text-decoration: none;
-    border-bottom: 1px solid var(--amber);
-    padding-bottom: 2px;
-    margin-top: 1rem;
-    transition: color 0.3s;
-  }
-
+  .quest-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); text-decoration: none; border-bottom: 1px solid var(--amber); padding-bottom: 2px; margin-top: 1rem; transition: color 0.3s; }
   .quest-link:hover { color: var(--amber); }
 
-  /* ── LORE (Background / Experience) ── */
-  .lore-timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
+  /* ── LORE ── */
+  .lore-timeline { position: relative; padding-left: 2rem; }
+  .lore-timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--amber), var(--forest), var(--amber-dim)); }
+  .lore-entry { position: relative; margin-bottom: 2rem; padding-left: 1rem; }
+  .lore-entry::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 14px; height: 14px; background: var(--amber); border-radius: 50%; border: 3px solid var(--parchment); box-shadow: 0 0 0 2px var(--amber-dim); }
+  .lore-date { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 0.2rem; }
+  .lore-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--forest-deep); margin-bottom: 0.15rem; }
+  .lore-place { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.9rem; color: var(--bark-light); margin-bottom: 0.4rem; }
+  .lore-desc { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); }
+  .patent-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: linear-gradient(135deg, rgba(200,149,46,0.12), rgba(200,149,46,0.05)); border: 1px solid var(--amber); padding: 0.3rem 0.7rem; border-radius: 4px; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-dim); margin-top: 0.5rem; }
 
-  .lore-timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--amber), var(--forest), var(--amber-dim));
-  }
-
-  .lore-entry {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-  }
-
-  .lore-entry::before {
-    content: '';
-    position: absolute;
-    left: -2rem;
-    top: 6px;
-    width: 14px;
-    height: 14px;
-    background: var(--amber);
-    border-radius: 50%;
-    border: 3px solid var(--parchment);
-    box-shadow: 0 0 0 2px var(--amber-dim);
-  }
-
-  .lore-date {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--amber-dim);
-    margin-bottom: 0.2rem;
-  }
-
-  .lore-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--forest-deep);
-    margin-bottom: 0.15rem;
-  }
-
-  .lore-place {
-    font-family: 'Crimson Pro', serif;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--bark-light);
-    margin-bottom: 0.4rem;
-  }
-
-  .lore-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--ink-soft);
-  }
-
-  .patent-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: linear-gradient(135deg, rgba(200,149,46,0.12), rgba(200,149,46,0.05));
-    border: 1px solid var(--amber);
-    padding: 0.3rem 0.7rem;
-    border-radius: 4px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--amber-dim);
-    margin-top: 0.5rem;
-  }
-
-  /* ── CONTACT (forest footer) ── */
-  .footer-bg {
-    background: linear-gradient(180deg, var(--parchment) 0%, var(--forest-deep) 15%);
-    padding-top: 0;
-  }
-
-  .contact-section {
-    text-align: center;
-    padding: 6rem 2rem 4rem;
-  }
-
+  /* ── CONTACT ── */
+  .footer-bg { background: linear-gradient(180deg, var(--parchment) 0%, var(--forest-deep) 15%); padding-top: 0; }
+  .contact-section { text-align: center; padding: 6rem 2rem 4rem; }
   .contact-section .section-title { color: var(--parchment); }
   .contact-section .section-ornament .line { background: var(--amber-dim); }
   .contact-section .section-ornament .diamond { background: var(--amber-dim); }
+  .contact-text { font-size: 1.05rem; color: rgba(244,236,216,0.7); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--parchment); text-decoration: none; padding: 0.6rem 1.4rem; border: 1.5px solid var(--amber-dim); border-radius: 4px; transition: all 0.3s; background: rgba(200,149,46,0.05); cursor: pointer; }
+  .contact-link:hover { background: rgba(200,149,46,0.15); border-color: var(--amber-glow); color: var(--amber-glow); }
+  .footer-note { text-align: center; padding: 1.5rem 2rem 2rem; font-family: 'Crimson Pro', serif; font-size: 0.85rem; color: rgba(244,236,216,0.3); font-style: italic; }
 
-  .contact-text {
-    font-size: 1.05rem;
-    color: rgba(244,236,216,0.7);
-    max-width: 500px;
-    margin: 0 auto 2rem;
-    line-height: 1.7;
-  }
-
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--parchment);
-    text-decoration: none;
-    padding: 0.6rem 1.4rem;
-    border: 1.5px solid var(--amber-dim);
-    border-radius: 4px;
-    transition: all 0.3s;
-    background: rgba(200,149,46,0.05);
-  }
-
-  .contact-link:hover {
-    background: rgba(200,149,46,0.15);
-    border-color: var(--amber-glow);
-    color: var(--amber-glow);
-  }
-
-  .footer-note {
-    text-align: center;
-    padding: 1.5rem 2rem 2rem;
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.85rem;
-    color: rgba(244,236,216,0.3);
-    font-style: italic;
-  }
+  /* ── Email Popup ── */
+  .email-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 38, 26, 0.75); backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center; }
+  .email-overlay.active { display: flex; }
+  .email-popup { background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%); border: 2px solid var(--amber); border-radius: 8px; padding: 2rem 2.5rem; text-align: center; position: relative; max-width: 400px; width: 90%; box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  .email-popup::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); border-radius: 8px 8px 0 0; }
+  .email-popup-title { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--forest-deep); margin-bottom: 0.3rem; }
+  .email-popup-subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.85rem; color: var(--bark-light); margin-bottom: 1.2rem; }
+  .email-popup-address { font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--ink); background: rgba(26,58,42,0.06); border: 1px solid rgba(26,58,42,0.12); border-radius: 4px; padding: 0.7rem 1rem; margin-bottom: 1rem; user-select: all; letter-spacing: 0.02em; }
+  .email-popup-copy { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--parchment); background: var(--forest-deep); border: 1.5px solid var(--amber-dim); border-radius: 4px; padding: 0.55rem 1.6rem; cursor: pointer; transition: all 0.3s; }
+  .email-popup-copy:hover { background: var(--forest); border-color: var(--amber-glow); }
+  .email-popup-copy.copied { background: var(--forest); border-color: var(--moss-light); color: var(--moss-light); }
+  .email-popup-close { position: absolute; top: 0.6rem; right: 0.8rem; background: none; border: none; font-size: 1.3rem; color: var(--bark-light); cursor: pointer; padding: 0.2rem; line-height: 1; transition: color 0.2s; }
+  .email-popup-close:hover { color: var(--ink); }
 
   /* ── Scroll animations ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── Dandelion canvas ── */
-  #dandelion-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 50;
-  }
+  #dandelion-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
@@ -711,10 +240,19 @@
 </head>
 <body>
 
-<!-- Dandelion overlay (fixed, always visible) -->
 <canvas id="dandelion-canvas"></canvas>
 
-<!-- NAV -->
+<!-- Email Popup -->
+<div class="email-overlay" id="emailOverlay">
+  <div class="email-popup">
+    <button class="email-popup-close" id="emailClose">✕</button>
+    <div class="email-popup-title">Send a Raven</div>
+    <div class="email-popup-subtitle">Reach me at</div>
+    <div class="email-popup-address">leombpires@gmail.com</div>
+    <button class="email-popup-copy" id="emailCopy">Copy to Clipboard</button>
+  </div>
+</div>
+
 <nav>
   <a href="#about">About</a>
   <a href="#classes">Classes</a>
@@ -724,30 +262,20 @@
   <a href="#contact">Contact</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="vine-left"></div>
   <div class="vine-right"></div>
-
   <div class="hero-emblem">⚔</div>
   <h1>Leandro Pires</h1>
   <div class="hero-subtitle">Junior Game Developer · Programmer</div>
-  <p class="hero-tagline">
-    A scientist's mind forging interactive worlds — seeking my first quest in the games industry.
-  </p>
-
+  <p class="hero-tagline">A scientist's mind forging interactive worlds — seeking my first quest in the games industry.</p>
   <div class="scroll-hint">▼</div>
 </div>
 
-<!-- ABOUT -->
 <div class="parchment-bg">
   <section id="about" class="reveal">
     <div class="section-title">The Adventurer</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
     <p class="about-text">
       Scientist turned game developer with a passion for building interactive experiences.
       After years in a <strong>Biotechnology research lab</strong> — where I co-authored a <span class="about-highlight">published patent</span> and independently taught myself <strong>C#</strong> to build a diagnostics tool — I followed my calling into game development.
@@ -758,166 +286,90 @@
     </p>
   </section>
 
-<!-- CLASSES (Languages) -->
   <section id="classes" class="reveal">
     <div class="section-title">Classes</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
-
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
     <div class="skills-grid">
-      <div class="skill-bar">
-        <div class="label">C# <span class="skill-tag">Unity</span></div>
-        <div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div>
-      </div>
-      <div class="skill-bar">
-        <div class="label">JavaScript <span class="skill-tag">p5.js / Canvas</span></div>
-        <div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div>
-      </div>
-      <div class="skill-bar">
-        <div class="label">GDScript <span class="skill-tag">Godot</span></div>
-        <div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div>
-      </div>
+      <div class="skill-bar"><div class="label">C# <span class="skill-tag">Unity</span></div><div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div></div>
+      <div class="skill-bar"><div class="label">JavaScript <span class="skill-tag">p5.js / Canvas</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
+      <div class="skill-bar"><div class="label">GDScript <span class="skill-tag">Godot</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
     </div>
   </section>
 
-<!-- STATS (Skills) -->
   <section id="skills" class="reveal forest-bg">
     <div class="section-title">Stats</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
-
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
     <div class="skills-grid">
-      <div class="skill-bar">
-        <div class="label">Gameplay Programming <span class="skill-tag">Controllers / AI / Systems</span></div>
-        <div class="bar-track"><div class="bar-fill amber" data-width="70%"></div></div>
-      </div>
-      <div class="skill-bar">
-        <div class="label">Tools Programming <span class="skill-tag">Editor Tools / Pipelines</span></div>
-        <div class="bar-track"><div class="bar-fill amber" data-width="55%"></div></div>
-      </div>
-      <div class="skill-bar">
-        <div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div>
-        <div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div>
-      </div>
-      <div class="skill-bar">
-        <div class="label">Team Collaboration <span class="skill-tag">Lab & Game Dev</span></div>
-        <div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div>
-      </div>
+      <div class="skill-bar"><div class="label">Gameplay Programming <span class="skill-tag">Controllers / AI / Systems</span></div><div class="bar-track"><div class="bar-fill amber" data-width="70%"></div></div></div>
+      <div class="skill-bar"><div class="label">Tools Programming <span class="skill-tag">Editor Tools / Pipelines</span></div><div class="bar-track"><div class="bar-fill amber" data-width="55%"></div></div></div>
+      <div class="skill-bar"><div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div><div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div></div>
+      <div class="skill-bar"><div class="label">Team Collaboration <span class="skill-tag">Lab & Game Dev</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
     </div>
   </section>
 
-<!-- PROJECTS -->
   <section id="quests" class="reveal">
     <div class="section-title">Quest Log</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
-    <!-- Main Project -->
     <div class="quest-card">
       <div class="quest-badge">★ Main Quest</div>
       <div class="quest-title">The Moloch Engine</div>
       <div class="quest-subtitle">Action Game · Godot · Sole Programmer</div>
-      <p class="quest-desc">
-        A team project where I served as the <strong>sole programmer</strong>. The player lands on an island, fights through robot enemies, clears a Data Center dungeon, and faces a final boss. Built with a focus on tight gameplay feel and designer-friendly systems.
-      </p>
-
+      <p class="quest-desc">A team project where I served as the <strong>sole programmer</strong>. The player lands on an island, fights through robot enemies, clears a Data Center dungeon, and faces a final boss. Built with a focus on tight gameplay feel and designer-friendly systems.</p>
       <div class="quest-features">
         <span class="tag">Responsive Player Controller</span>
         <span class="tag">Enemy AI Behaviour</span>
         <span class="tag">Ability System</span>
         <span class="tag">Resource Management</span>
+        <span class="tag">Hit Detection &amp; Registration</span>
         <span class="tag">Animation State Machine</span>
         <span class="tag">Real-time VFX</span>
       </div>
-
-      <!-- PLACEHOLDER: Replace with your gameplay video embed or gif -->
       <div class="media-placeholder">
-        <div class="icon">🎬</div>
-        GAMEPLAY FOOTAGE
+        <div class="icon">🎬</div>GAMEPLAY FOOTAGE
         <span>Replace this with a video embed or GIF of The Moloch Engine</span>
       </div>
-
       <!--
         TO ADD YOUR VIDEO: Replace the .media-placeholder div above with:
         <div style="width:100%; aspect-ratio:16/9; margin-top:1.5rem; border-radius:6px; overflow:hidden;">
           <iframe width="100%" height="100%" src="YOUR_YOUTUBE_EMBED_URL" frameborder="0" allowfullscreen></iframe>
         </div>
       -->
-
-      <a href="#" class="quest-link" target="_blank">
-        View on GitHub →
-        <!-- TODO: Replace # with your actual GitHub repo link -->
-      </a>
+      <a href="#" class="quest-link" target="_blank">View on GitHub →<!-- TODO: Replace # with your actual GitHub repo link --></a>
     </div>
 
-    <!-- 3D Rotating Cube -->
     <div class="quest-card">
       <div class="quest-badge">◆ Side Quest</div>
       <div class="quest-title">3D Cube Renderer</div>
       <div class="quest-subtitle">3D Graphics · JavaScript · p5.js</div>
-      <p class="quest-desc">
-        A from-scratch <strong>3D rendering exercise</strong> built without a game engine or graphics library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong> to hide non-visible faces, and <strong>per-face lighting</strong> calculated via the dot product between face normals and a directional light vector. Includes an interactive widget to adjust the light direction in real time.
-      </p>
-
+      <p class="quest-desc">A from-scratch <strong>3D rendering exercise</strong> built without a game engine or graphics library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong> to hide non-visible faces, and <strong>per-face lighting</strong> calculated via the dot product between face normals and a directional light vector. Includes an interactive widget to adjust the light direction in real time.</p>
       <div class="quest-features">
         <span class="tag">Perspective Projection</span>
         <span class="tag">Back-face Culling</span>
         <span class="tag">Dot Product Lighting</span>
         <span class="tag">Interactive Light Direction</span>
       </div>
-
       <div class="demo-embed square">
-        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/lDMT3DIpk"
-                scrolling="no"
-                frameborder="0"
-                allowfullscreen></iframe>
+        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/lDMT3DIpk" scrolling="no" frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <!--
-        If the embed doesn't load, replace the iframe src with a video/GIF:
-        <div class="media-placeholder">...</div>
-      -->
     </div>
 
-    <!-- Text Particle Physics -->
     <div class="quest-card">
       <div class="quest-badge">◆ Side Quest</div>
       <div class="quest-title">Text Particle System</div>
       <div class="quest-subtitle">Interactive Simulation · JavaScript · p5.js</div>
-      <p class="quest-desc">
-        An interactive <strong>particle system</strong> that converts text into hundreds of individual points, each with its own physics. Supports two modes: a <strong>magnifying glass</strong> that reveals hidden text by snapping nearby particles into their letter positions, and a <strong>vortex repulsion</strong> mode where arranged text scatters when the cursor approaches — demonstrating <strong>spatial queries</strong>, force-based movement, and target-seeking behaviour.
-      </p>
-
+      <p class="quest-desc">An interactive <strong>particle system</strong> that converts text into hundreds of individual points, each with its own physics. Supports two modes: a <strong>magnifying glass</strong> that reveals hidden text by easing nearby particles toward their letter positions, and a <strong>vortex repulsion</strong> mode where arranged text scatters when the cursor approaches — demonstrating <strong>spatial queries</strong>, force-based movement, and target-seeking behaviour.</p>
       <div class="quest-features">
         <span class="tag">Particle System</span>
         <span class="tag">Force-based Physics</span>
         <span class="tag">Spatial Interaction</span>
         <span class="tag">Input-driven Behaviour</span>
       </div>
-
       <div class="demo-embed square">
-        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/H83muOp0w"
-                scrolling="no"
-                frameborder="0"
-                allowfullscreen></iframe>
+        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/H83muOp0w" scrolling="no" frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <!--
-        If the embed doesn't load, replace the iframe src with a video/GIF:
-        <div class="media-placeholder">...</div>
-      -->
     </div>
 
-    <!-- Training Grounds -->
     <div class="training-grounds">
       <div class="training-header">
         <div class="quest-badge">⬥ Training Grounds</div>
@@ -925,18 +377,34 @@
       </div>
       <div class="training-grid">
         <div class="training-card">
+          <div class="training-thumb">
+            <!-- TODO: Replace with <img src="images/pong.png" alt="Pong"> -->
+            <div class="thumb-placeholder">🏓</div>
+          </div>
           <div class="training-title">Pong</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
+          <div class="training-thumb">
+            <!-- TODO: Replace with <img src="images/breakout.png" alt="BreakOut"> -->
+            <div class="thumb-placeholder">🧱</div>
+          </div>
           <div class="training-title">BreakOut</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
+          <div class="training-thumb">
+            <!-- TODO: Replace with <img src="images/platformer.png" alt="Platform Jumper"> -->
+            <div class="thumb-placeholder">🍄</div>
+          </div>
           <div class="training-title">Platform Jumper</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
+          <div class="training-thumb">
+            <!-- TODO: Replace with <img src="images/polyomino.png" alt="Polyomino"> -->
+            <div class="thumb-placeholder">🧩</div>
+          </div>
           <div class="training-title">Polyomino</div>
           <div class="training-lang">C# · Unity</div>
         </div>
@@ -944,72 +412,45 @@
     </div>
   </section>
 
-<!-- BACKGROUND / EXPERIENCE -->
   <section id="lore" class="reveal">
     <div class="section-title">Lore</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
-
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
     <div class="lore-timeline">
-
       <div class="lore-entry">
         <div class="lore-date">2024 – 2025</div>
         <div class="lore-title">Creative Digital Media — Games Edition</div>
         <div class="lore-place"><!-- TODO: Add institution name --></div>
-        <div class="lore-desc">
-          Completed a 9-month intensive program focused on game development with C# / Unity. Self-taught GDScript / Godot and Real-time VFX outside the curriculum. Shipped a team project as sole programmer.
-        </div>
+        <div class="lore-desc">Completed a 9-month intensive program focused on game development with C# / Unity. Self-taught GDScript / Godot and Real-time VFX outside the curriculum. Shipped a team project as sole programmer.</div>
       </div>
-
       <div class="lore-entry">
         <div class="lore-date"><!-- TODO: Add dates --></div>
         <div class="lore-title">Research Lab — Biotechnology</div>
         <div class="lore-place"><!-- TODO: Add university/lab name --></div>
-        <div class="lore-desc">
-          Worked 2+ years in a research lab focused on plant genetics. Co-authored a patent on a novel gene family in plants. Built a C# diagnostic tool to support research workflows. Collaborated in a scientific team environment with rigorous problem-solving and documentation practices.
-        </div>
+        <div class="lore-desc">Worked 2+ years in a research lab focused on plant genetics. Co-authored a patent on a novel gene family in plants. Built a C# diagnostic tool to support research workflows. Collaborated in a scientific team environment with rigorous problem-solving and documentation practices.</div>
         <div class="patent-badge">📜 Co-authored Patent — Gene Family in Plants</div>
       </div>
-
       <div class="lore-entry">
         <div class="lore-date"><!-- TODO: Add dates --></div>
         <div class="lore-title">M.Sc. Biotechnology</div>
         <div class="lore-place"><!-- TODO: Add university name --></div>
-        <div class="lore-desc">
-          Master's degree in Biotechnology. Developed analytical and research skills that now fuel a methodical approach to game systems design and debugging.
-        </div>
+        <div class="lore-desc">Master's degree in Biotechnology. Developed analytical and research skills that now fuel a methodical approach to game systems design and debugging.</div>
       </div>
-
     </div>
   </section>
 </div>
 
-<!-- CONTACT -->
 <div class="footer-bg">
   <div class="contact-section" id="contact">
     <div class="section-title">Send a Raven</div>
-    <div class="section-ornament">
-      <div class="line"></div>
-      <div class="diamond"></div>
-      <div class="line"></div>
-    </div>
-    <p class="contact-text">
-      Looking for an ambitious junior programmer passionate about crafting memorable player experiences? I'd love to be part of your team.
-    </p>
+    <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+    <p class="contact-text">Looking for an ambitious junior programmer passionate about crafting memorable player experiences? I'd love to be part of your team.</p>
     <div class="contact-links">
-      <a href="mailto:leombpires@gmail.com" class="contact-link">✉ Email</a>
+      <button class="contact-link" id="emailBtn">✉ Email</button>
       <a href="https://www.linkedin.com/in/leandro-pires-gamedev/" target="_blank" class="contact-link">🔗 LinkedIn</a>
-      <a href="#" target="_blank" class="contact-link">⌨ GitHub
-        <!-- TODO: Replace # with your GitHub profile link -->
-      </a>
+      <a href="#" target="_blank" class="contact-link">⌨ GitHub<!-- TODO: Replace # with your GitHub profile link --></a>
     </div>
   </div>
-  <div class="footer-note">
-    Crafted with care in Porto, Portugal · Leandro Pires © 2026
-  </div>
+  <div class="footer-note">Crafted with care in Porto, Portugal · Leandro Pires © 2026</div>
 </div>
 
 <script>
@@ -1020,278 +461,137 @@
         e.target.classList.add('visible');
         if (e.target.querySelector('.bar-fill')) {
           e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
-            setTimeout(() => {
-              bar.style.width = bar.dataset.width;
-            }, i * 120);
+            setTimeout(() => { bar.style.width = bar.dataset.width; }, i * 120);
           });
         }
       }
     });
   }, { threshold: 0.15 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Email Popup ──
+  (() => {
+    const overlay = document.getElementById('emailOverlay');
+    const btn = document.getElementById('emailBtn');
+    const closeBtn = document.getElementById('emailClose');
+    const copyBtn = document.getElementById('emailCopy');
+    btn.addEventListener('click', () => overlay.classList.add('active'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.classList.remove('active'); });
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('leombpires@gmail.com').then(() => {
+        copyBtn.textContent = '✓ Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = 'Copy to Clipboard'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    });
+  })();
 
   // ── Dandelion Animation ──
   (() => {
     const canvas = document.getElementById('dandelion-canvas');
     const ctx = canvas.getContext('2d');
-    let W, H, dpr;
-    let seeds = [];
-    let seedsReleased = 0;
+    let W, H, dpr, seeds = [], seedsReleased = 0, dandelionFaded = false;
     const TOTAL_SEEDS = 40;
-    let dandelionFaded = false;
 
     function resize() {
       dpr = window.devicePixelRatio || 1;
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+    window.addEventListener('resize', resize); resize();
 
-    window.addEventListener('resize', resize);
-    resize();
-
-    // Get the hero/parchment boundary in viewport coords
-    function getHeroBoundary() {
-      const hero = document.querySelector('.hero');
-      const rect = hero.getBoundingClientRect();
-      return rect.bottom; // viewport Y where green meets white
-    }
-
-    // Dandelion head position in viewport — sits beside the hero tagline
+    function getHeroBoundary() { const r = document.querySelector('.hero').getBoundingClientRect(); return r.bottom; }
     function getDandelionHead() {
-      const heroTagline = document.querySelector('.hero-tagline');
-      if (heroTagline) {
-        const rect = heroTagline.getBoundingClientRect();
-        return { x: 70, y: rect.top + rect.height * 0.5 };
-      }
-      // fallback
-      const boundaryY = getHeroBoundary();
-      return { x: 70, y: boundaryY - 200 };
+      const el = document.querySelector('.hero-tagline');
+      if (el) { const r = el.getBoundingClientRect(); return { x: 70, y: r.top + r.height * 0.5 }; }
+      return { x: 70, y: getHeroBoundary() - 200 };
     }
 
-    // Seed class - lives in viewport space once released
     class Seed {
-      constructor(index) {
-        this.index = index;
-        const angle = (index / TOTAL_SEEDS) * Math.PI * 2;
-        this.attachAngle = angle;
-        this.attachR = 8 + Math.random() * 12;
-        this.released = false;
-        this.releaseTime = 0;
-        this.rx = 0; // release position (viewport)
-        this.ry = 0;
-        this.x = 0;
-        this.y = 0;
-        this.vx = 0;
-        this.vy = 0;
-        this.windFactor = 0.5 + Math.random() * 1.0;
-        this.wobbleFreq = 1.2 + Math.random() * 2.5;
-        this.wobbleAmp = 10 + Math.random() * 18;
-        this.size = 0.7 + Math.random() * 0.6;
-        this.opacity = 1;
-        this.filamentLen = 12 + Math.random() * 8;
-        this.driftAngle = -0.3 + Math.random() * 0.6; // slight vertical variance
+      constructor(i) {
+        const a = (i / TOTAL_SEEDS) * Math.PI * 2;
+        this.attachAngle = a; this.attachR = 8 + Math.random() * 12;
+        this.released = false; this.releaseTime = 0;
+        this.rx = 0; this.ry = 0; this.x = 0; this.y = 0;
+        this.windFactor = 0.5 + Math.random(); this.wobbleFreq = 1.2 + Math.random() * 2.5;
+        this.wobbleAmp = 10 + Math.random() * 18; this.size = 0.7 + Math.random() * 0.6;
+        this.opacity = 1; this.filamentLen = 12 + Math.random() * 8;
+        this.driftAngle = -0.3 + Math.random() * 0.6;
       }
-
-      getAttachedPos(headX, headY) {
-        return {
-          x: headX + Math.cos(this.attachAngle) * this.attachR,
-          y: headY + Math.sin(this.attachAngle) * this.attachR
-        };
-      }
-
-      release(time, headX, headY) {
-        this.released = true;
-        this.releaseTime = time;
-        const pos = this.getAttachedPos(headX, headY);
-        this.rx = pos.x;
-        this.ry = pos.y;
-        this.vx = 0.4 + Math.random() * 0.6;
-        this.vy = -0.3 - Math.random() * 0.8;
-      }
-
-      update(time) {
+      getAttachedPos(hx, hy) { return { x: hx + Math.cos(this.attachAngle) * this.attachR, y: hy + Math.sin(this.attachAngle) * this.attachR }; }
+      release(t, hx, hy) { this.released = true; this.releaseTime = t; const p = this.getAttachedPos(hx, hy); this.rx = p.x; this.ry = p.y; this.vx = 0.4 + Math.random() * 0.6; this.vy = -0.3 - Math.random() * 0.8; }
+      update(t) {
         if (!this.released) return;
-        const elapsed = (time - this.releaseTime) / 1000;
-
-        // Drift right with wind, gentle vertical wobble, slight gravity
-        this.x = this.rx + (this.vx * 60 + 25 * this.windFactor) * elapsed;
-        this.y = this.ry + this.vy * 30 * Math.min(elapsed, 2.5)
-                 + 5 * elapsed * elapsed * this.driftAngle
-                 + Math.sin(elapsed * this.wobbleFreq) * this.wobbleAmp;
-
-        // Fade out as they travel off screen
-        const distX = this.x - this.rx;
-        this.opacity = Math.max(0, 1 - distX / (W * 0.85));
+        const e = (t - this.releaseTime) / 1000;
+        this.x = this.rx + (this.vx * 60 + 25 * this.windFactor) * e;
+        this.y = this.ry + this.vy * 30 * Math.min(e, 2.5) + 5 * e * e * this.driftAngle + Math.sin(e * this.wobbleFreq) * this.wobbleAmp;
+        this.opacity = Math.max(0, 1 - (this.x - this.rx) / (W * 0.85));
       }
-
-      draw(ctx, headX, headY, heroBoundaryY) {
-        let drawX, drawY, alpha;
-
-        if (!this.released) {
-          const pos = this.getAttachedPos(headX, headY);
-          drawX = pos.x;
-          drawY = pos.y;
-          alpha = 0.85;
-        } else {
-          drawX = this.x;
-          drawY = this.y;
-          alpha = this.opacity * 0.85;
+      draw(ctx, hx, hy, boundary) {
+        let dx, dy, al;
+        if (!this.released) { const p = this.getAttachedPos(hx, hy); dx = p.x; dy = p.y; al = 0.85; }
+        else { dx = this.x; dy = this.y; al = this.opacity * 0.85; }
+        if (al <= 0.01) return;
+        const over = dy > boundary;
+        const bc = over ? 'rgba(160,116,36,0.9)' : '#fff';
+        const fc = over ? 'rgba(160,116,36,0.55)' : 'rgba(255,255,255,0.65)';
+        const dc = over ? 'rgba(160,116,36,0.4)' : 'rgba(255,255,255,0.45)';
+        ctx.save(); ctx.globalAlpha = al; ctx.translate(dx, dy);
+        ctx.fillStyle = bc; ctx.beginPath(); ctx.ellipse(0, 0, 1.2 * this.size, 2.8 * this.size, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = fc; ctx.lineWidth = 0.5;
+        for (let i = 0; i < 7; i++) {
+          const a = (i / 7) * Math.PI * 2, l = this.filamentLen * this.size;
+          const ex = Math.cos(a) * l, ey = Math.sin(a) * l - l * 0.25;
+          ctx.beginPath(); ctx.moveTo(0, -2 * this.size); ctx.quadraticCurveTo(ex * 0.35, ey * 0.5, ex, ey); ctx.stroke();
+          ctx.fillStyle = dc; ctx.beginPath(); ctx.arc(ex, ey, 0.6, 0, Math.PI * 2); ctx.fill();
         }
-
-        if (alpha <= 0.01) return;
-
-        // Determine color based on whether seed is over dark hero or light parchment
-        const overParchment = drawY > heroBoundaryY;
-        const bodyColor = overParchment ? 'rgba(160,116,36,0.9)' : '#fff';
-        const filamentColor = overParchment ? 'rgba(160,116,36,0.55)' : 'rgba(255,255,255,0.65)';
-        const dotColor = overParchment ? 'rgba(160,116,36,0.4)' : 'rgba(255,255,255,0.45)';
-
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.translate(drawX, drawY);
-
-        // Seed body
-        ctx.fillStyle = bodyColor;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, 1.2 * this.size, 2.8 * this.size, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Filaments
-        ctx.strokeStyle = filamentColor;
-        ctx.lineWidth = 0.5;
-        const rays = 7;
-        for (let i = 0; i < rays; i++) {
-          const a = (i / rays) * Math.PI * 2;
-          const len = this.filamentLen * this.size;
-          const ex = Math.cos(a) * len;
-          const ey = Math.sin(a) * len - len * 0.25;
-          ctx.beginPath();
-          ctx.moveTo(0, -2 * this.size);
-          ctx.quadraticCurveTo(ex * 0.35, ey * 0.5, ex, ey);
-          ctx.stroke();
-          ctx.fillStyle = dotColor;
-          ctx.beginPath();
-          ctx.arc(ex, ey, 0.6, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
         ctx.restore();
       }
     }
 
-    // Initialize seeds
-    function initSeeds() {
-      seeds = [];
-      for (let i = 0; i < TOTAL_SEEDS; i++) {
-        seeds.push(new Seed(i));
-      }
-      seedsReleased = 0;
-      dandelionFaded = false;
-    }
-
+    function initSeeds() { seeds = []; for (let i = 0; i < TOTAL_SEEDS; i++) seeds.push(new Seed(i)); seedsReleased = 0; dandelionFaded = false; }
     initSeeds();
     window.addEventListener('resize', () => { resize(); initSeeds(); });
 
-    // Draw stem and head
-    function drawDandelion(ctx, headX, headY, attachedCount) {
-      // Fade the whole dandelion once it's off-screen top
-      const dandelionAlpha = Math.max(0, Math.min(1, (headY + 200) / 250));
-      if (dandelionAlpha <= 0) { dandelionFaded = true; return; }
-
-      ctx.save();
-      ctx.globalAlpha = dandelionAlpha;
-
-      // Stem — enters from left edge, curves up to head (long and thick)
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(-60, headY + 200); // far off-screen left, much lower
-      ctx.bezierCurveTo(-20, headY + 180, 10, headY + 120, 25, headY + 80);
-      ctx.bezierCurveTo(35, headY + 50, 50, headY + 20, headX, headY);
-      ctx.stroke();
-
-      // Small leaf on stem
+    function drawDandelion(ctx, hx, hy, count) {
+      const alpha = Math.max(0, Math.min(1, (hy + 200) / 250));
+      if (alpha <= 0) { dandelionFaded = true; return; }
+      ctx.save(); ctx.globalAlpha = alpha;
+      ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(-60, hy + 200);
+      ctx.bezierCurveTo(-20, hy + 180, 10, hy + 120, 25, hy + 80);
+      ctx.bezierCurveTo(35, hy + 50, 50, hy + 20, hx, hy); ctx.stroke();
       ctx.fillStyle = 'rgba(255,255,255,0.1)';
-      ctx.beginPath();
-      ctx.ellipse(18, headY + 100, 7, 16, -0.4, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Second leaf higher up
-      ctx.beginPath();
-      ctx.ellipse(42, headY + 40, 5, 12, 0.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Head center
-      ctx.fillStyle = 'rgba(255,255,255,0.3)';
-      ctx.beginPath();
-      ctx.arc(headX, headY, 4, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Glow for remaining seeds
-      if (attachedCount > 0) {
-        const glowR = 20 + (attachedCount / TOTAL_SEEDS) * 15;
-        const grad = ctx.createRadialGradient(headX, headY, 2, headX, headY, glowR);
-        grad.addColorStop(0, 'rgba(255,255,255,0.1)');
-        grad.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(headX, headY, glowR, 0, Math.PI * 2);
-        ctx.fill();
+      ctx.beginPath(); ctx.ellipse(18, hy + 100, 7, 16, -0.4, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(42, hy + 40, 5, 12, 0.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.beginPath(); ctx.arc(hx, hy, 4, 0, Math.PI * 2); ctx.fill();
+      if (count > 0) {
+        const r = 20 + (count / TOTAL_SEEDS) * 15, g = ctx.createRadialGradient(hx, hy, 2, hx, hy, r);
+        g.addColorStop(0, 'rgba(255,255,255,0.1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(hx, hy, r, 0, Math.PI * 2); ctx.fill();
       }
-
       ctx.restore();
     }
 
-    // Scroll progress: 0 = top of page, 1 = hero fully scrolled past
-    function getScrollProgress() {
-      const hero = document.querySelector('.hero');
-      const rect = hero.getBoundingClientRect();
-      return Math.max(0, Math.min(1, -rect.top / rect.height));
-    }
+    function getScrollProgress() { const r = document.querySelector('.hero').getBoundingClientRect(); return Math.max(0, Math.min(1, -r.top / r.height)); }
 
-    // Main loop
-    function animate(time) {
+    function animate(t) {
       ctx.clearRect(0, 0, W, H);
-
-      const head = getDandelionHead();
-      const scrollProg = getScrollProgress();
-
-      // Release seeds as user scrolls (all released by 50% scroll)
-      const targetReleased = Math.floor(Math.min(1, scrollProg / 0.5) * TOTAL_SEEDS);
-
-      while (seedsReleased < targetReleased && seedsReleased < seeds.length) {
-        seeds[seedsReleased].release(time, head.x, head.y);
-        seedsReleased++;
-      }
-
-      // Draw the stem + head (scrolls with page via viewport coords)
-      const attachedCount = TOTAL_SEEDS - seedsReleased;
-      const heroBoundaryY = getHeroBoundary();
-      drawDandelion(ctx, head.x, head.y, attachedCount);
-
-      // Draw all seeds
-      for (const seed of seeds) {
-        seed.update(time);
-        seed.draw(ctx, head.x, head.y, heroBoundaryY);
-      }
-
-      // Hide canvas once everything has fully faded
-      if (dandelionFaded && seeds.every(s => s.released && s.opacity <= 0.01)) {
-        canvas.style.display = 'none';
-      } else {
-        canvas.style.display = '';
-      }
-
+      const head = getDandelionHead(), sp = getScrollProgress();
+      const target = Math.floor(Math.min(1, sp / 0.5) * TOTAL_SEEDS);
+      while (seedsReleased < target && seedsReleased < seeds.length) { seeds[seedsReleased].release(t, head.x, head.y); seedsReleased++; }
+      const boundary = getHeroBoundary();
+      drawDandelion(ctx, head.x, head.y, TOTAL_SEEDS - seedsReleased);
+      for (const s of seeds) { s.update(t); s.draw(ctx, head.x, head.y, boundary); }
+      if (dandelionFaded && seeds.every(s => s.released && s.opacity <= 0.01)) canvas.style.display = 'none';
+      else canvas.style.display = '';
       requestAnimationFrame(animate);
     }
-
     requestAnimationFrame(animate);
   })();
 </script>
-
 </body>
 </html>
