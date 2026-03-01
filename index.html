@@ -460,6 +460,34 @@
     font-style: italic;
   }
 
+  /* ── Demo Embeds ── */
+  .demo-embed {
+    margin-top: 1.5rem;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid var(--amber-dim);
+    background: var(--forest-deep);
+  }
+
+  .demo-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .demo-embed.square {
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .demo-embed.wide {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
   /* ── Video / Media Placeholder ── */
   .media-placeholder {
     width: 100%;
@@ -847,16 +875,16 @@
         <span class="tag">Interactive Light Direction</span>
       </div>
 
-      <!-- PLACEHOLDER: Replace with embed or recording -->
-      <div class="media-placeholder">
-        <iframe src="https://editor.p5js.org/OrdnaeLP/full/lDMT3DIpk"
-                style="width:100%; aspect-ratio:16/9; border:none; border-radius:6px; margin-top:1.5rem;"></iframe>
+      <div class="demo-embed square">
+        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/lDMT3DIpk"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen></iframe>
       </div>
 
       <!--
-        TO EMBED YOUR P5.JS SKETCH: Replace the .media-placeholder div above with:
-        <iframe src="https://editor.p5js.org/OrdnaeLP/full/lDMT3DIpk"
-                style="width:100%; aspect-ratio:16/9; border:none; border-radius:6px; margin-top:1.5rem;"></iframe>
+        If the embed doesn't load, replace the iframe src with a video/GIF:
+        <div class="media-placeholder">...</div>
       -->
     </div>
 
@@ -876,17 +904,16 @@
         <span class="tag">Input-driven Behaviour</span>
       </div>
 
-      <!-- PLACEHOLDER: Replace with embed or recording -->
-      <div class="media-placeholder">
-        <div class="icon">🎬</div>
-        DEMO
-        <span>Replace with a live p5.js embed, recording, or GIF</span>
+      <div class="demo-embed wide">
+        <iframe src="https://editor.p5js.org/OrdnaeLP/embed/H83muOp0w"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen></iframe>
       </div>
 
       <!--
-        TO EMBED YOUR P5.JS SKETCH: Replace the .media-placeholder div above with:
-        <iframe src="https://editor.p5js.org/OrdnaeLP/full/H83muOp0w"
-                style="width:100%; aspect-ratio:16/9; border:none; border-radius:6px; margin-top:1.5rem;"></iframe>
+        If the embed doesn't load, replace the iframe src with a video/GIF:
+        <div class="media-placeholder">...</div>
       -->
     </div>
 
