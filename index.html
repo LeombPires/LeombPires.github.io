@@ -382,13 +382,13 @@
       <div class="quest-subtitle">Action Game · Godot · Sole Programmer</div>
       <p class="quest-desc">A team project where I served as the <strong>sole programmer</strong>. The player lands on an island, fights through robot enemies, clears a Data Center dungeon, and faces a final boss. Built with a focus on tight gameplay feel and designer-friendly systems.</p>
       <div class="quest-features">
-        <span class="tag" data-desc="Coyote time (grace frames after leaving a ledge), input buffering for queued attacks, momentum-based movement, and tuned acceleration curves for a responsive, forgiving feel.">Responsive Player Controller</span>
-        <span class="tag" data-desc="Finite State Machine with Idle, Chase, Attack, AttackIdle, and Death states. Uses hysteresis (dual-threshold distances) to prevent state flickering. Line-of-sight raycasting for detection, group alert propagation to notify nearby enemies, and distance-based respawn logic.">Enemy AI Behaviour</span>
-        <span class="tag" data-desc="Energy-costed abilities — Laser (low cooldown, sustained beam), Magnetic Pulse (AoE pull that groups enemies), and Shield — each with independent cooldown timers and energy cost requirements. Designed as modular, data-driven components.">Ability System</span>
-        <span class="tag" data-desc="Health, Stamina (consumed by dodges and fast movement), and Energy (consumed by abilities). Each resource tracks base max, current max, current value, and active buffs — supporting temporary modifiers and regeneration.">Resource Management</span>
-        <span class="tag" data-desc="Hitbox/Hurtbox separation — each attack spawns a dedicated hitbox scene with its own shape, lifetime, and damage data. Invincibility frames (i-frames) are triggered by the movement component during dodge rolls, temporarily disabling hurtbox collision.">Hit Detection &amp; Registration</span>
-        <span class="tag" data-desc="No blend trees — a signal-driven approach where gameplay components emit state signals to a dedicated animation controller script, keeping transition logic decoupled from the AnimationPlayer. Clean separation of gameplay state and visual feedback.">Animation State Machine</span>
-        <span class="tag" data-desc="GPU particle systems with custom shaders, shader-driven materials for stylised surfaces, camera shake on heavy attacks (screen trauma), and directional recoil on ranged hits. Authored in Godot's visual shader editor and GDScript.">Real-time VFX</span>
+        <span class="tag" data-desc="Coyote time, input buffering, and tuned acceleration curves. Built for tight game feel with forgiveness mechanics that keep the player in flow.">Responsive Player Controller</span>
+        <span class="tag" data-desc="Finite State Machine with idle, chase, attack, and death states. Hysteresis on distance thresholds to prevent state flickering. Line-of-sight detection via raycasting, group alert propagation, and distance-based respawn logic.">Enemy AI Behaviour</span>
+        <span class="tag" data-desc="Modular, resource-costed abilities with independent cooldown timers and cost thresholds. Each ability is a self-contained component — easy to tune, extend, or swap without touching other systems">Ability System</span>
+        <span class="tag" data-desc="Generic resource system tracking base max, current max, current value, and active buff modifiers. Supports multiple resource types (health, stamina, energy) through a single reusable architecture with regeneration and temporary modifier support.">Resource Management</span>
+        <span class="tag" data-desc="Hitbox/Hurtbox separation with per-attack hitbox scenes — each carrying its own shape, lifetime, and damage payload. Invincibility frames toggled by the movement system during dodges, temporarily disabling hurtbox collision layers.">Hit Detection &amp; Registration</span>
+        <span class="tag" data-desc="Signal-driven animation control decoupled from gameplay logic. Components emit state change signals to a dedicated animation controller — no blend trees, clean separation between game state and visual feedback.">Animation State Machine</span>
+        <span class="tag" data-desc="GPU particle systems with custom shaders, screen shake (trauma-based camera system) on heavy hits, and directional recoil on ranged impacts. Shader work done in both visual and code-based pipelines.">Real-time VFX</span>
       </div>
       <div class="media-placeholder">
         <div class="icon">🎬</div>GAMEPLAY FOOTAGE
@@ -402,10 +402,10 @@
       <div class="quest-subtitle">3D Graphics · JavaScript · p5.js</div>
       <p class="quest-desc">A from-scratch <strong>3D rendering exercise</strong> built without a game engine or graphics library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong> to hide non-visible faces, and <strong>per-face lighting</strong> calculated via the dot product between face normals and a directional light vector. Includes an interactive widget to adjust the light direction in real time.</p>
       <div class="quest-features">
-        <span class="tag" data-desc="Manual 3D-to-2D projection using a virtual camera and field-of-view — dividing X and Y by Z depth to simulate foreshortening, implemented from scratch without any 3D library.">Perspective Projection</span>
-        <span class="tag" data-desc="Calculates each face's surface normal and compares it against the camera direction — faces pointing away from the viewer are discarded before rasterisation, a core real-time rendering optimisation.">Back-face Culling</span>
-        <span class="tag" data-desc="Per-face diffuse shading computed as the dot product between the face normal and a directional light vector (Lambertian reflectance), giving each face a brightness proportional to its angle to the light source.">Dot Product Lighting</span>
-        <span class="tag" data-desc="A UI widget that lets the user adjust the light direction vector in real time, with the shading updating every frame — useful for understanding how surface normals interact with light in a rendering pipeline.">Interactive Light Direction</span>
+        <span class="tag" data-desc="Manual 3D-to-2D projection — dividing world-space coordinates by Z depth to produce foreshortening. Implemented from scratch with no graphics library.">Perspective Projection</span>
+        <span class="tag" data-desc="Surface normal comparison against the view direction to discard rear-facing polygons before rasterisation — a standard real-time rendering optimisation.">Back-face Culling</span>
+        <span class="tag" data-desc="Per-face Lambertian diffuse shading via the dot product between face normals and a directional light vector.">Dot Product Lighting</span>
+        <span class="tag" data-desc="Runtime-adjustable light direction vector with per-frame shading recalculation, demonstrating how surface normals interact with directional lighting.">Interactive Light Direction</span>
       </div>
       <div class="demo-embed square">
         <iframe src="https://editor.p5js.org/OrdnaeLP/embed/lDMT3DIpk" scrolling="no" frameborder="0" allowfullscreen></iframe>
@@ -418,10 +418,10 @@
       <div class="quest-subtitle">Interactive Simulation · JavaScript · p5.js</div>
       <p class="quest-desc">An interactive <strong>particle system</strong> that converts text into hundreds of individual points, each with its own physics. Supports two modes: a <strong>magnifying glass</strong> that reveals hidden text by easing nearby particles toward their letter positions, and a <strong>vortex repulsion</strong> mode where arranged text scatters when the cursor approaches — demonstrating <strong>spatial queries</strong>, force-based movement, and target-seeking behaviour.</p>
       <div class="quest-features">
-        <span class="tag" data-desc="A custom emitter that spawns hundreds of particles from rasterised text pixel data, each maintaining independent position, velocity, and target — a common pattern in game engines and motion graphics.">Particle System</span>
-        <span class="tag" data-desc="Per-particle force accumulation with attraction (target-seeking via steering forces), repulsion (inverse-square falloff from cursor), damping, and velocity integration — the same force model used in gameplay physics and flocking simulations.">Force-based Physics</span>
-        <span class="tag" data-desc="Distance-based spatial queries between the cursor and each particle, determining which particles fall within the interaction radius — a simplified version of the broad-phase checks used in collision detection.">Spatial Interaction</span>
-        <span class="tag" data-desc="Two distinct interaction modes driven by mouse input: magnify (reveal) applies easing toward letter targets, while vortex (scatter) applies radial repulsion — demonstrating how input context can switch behaviour at runtime.">Input-driven Behaviour</span>
+        <span class="tag" data-desc="Custom emitter spawning hundreds of particles from rasterised pixel data, each with independent position, velocity, and seek target.">Particle System</span>
+        <span class="tag" data-desc="Per-particle force accumulation — steering forces, inverse-square repulsion, damping, and velocity integration. The same model used in flocking, physics sims, and gameplay force fields.">Force-based Physics</span>
+        <span class="tag" data-desc="Distance-based queries determining which particles fall within an interaction radius — a simplified broad-phase check.">Spatial Interaction</span>
+        <span class="tag" data-desc="Two runtime-switchable interaction modes — target-seeking easing vs. radial repulsion — driven by mouse input context.">Input-driven Behaviour</span>
       </div>
       <div class="demo-embed square">
         <iframe src="https://editor.p5js.org/OrdnaeLP/embed/H83muOp0w" scrolling="no" frameborder="0" allowfullscreen></iframe>
