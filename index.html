@@ -43,7 +43,6 @@
     overflow-x: hidden;
   }
 
-  /* ── Noise / texture overlay ── */
   body::before {
     content: '';
     position: fixed;
@@ -120,7 +119,7 @@
   .bar-fill.ruby  { background: linear-gradient(90deg, var(--bark), var(--bark-light)); }
 
   /* ── QUEST LOG ── */
-  .quest-card { background: linear-gradient(135deg, rgba(26,58,42,0.04), rgba(200,149,46,0.04)); border: 2px solid var(--amber-dim); border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; }
+  .quest-card { background: linear-gradient(135deg, rgba(26,58,42,0.04), rgba(200,149,46,0.04)); border: 2px solid var(--amber-dim); border-radius: 8px; padding: 2rem; position: relative; overflow: visible; }
   .quest-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); }
   .quest-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--forest-deep); color: var(--amber-glow); padding: 0.25rem 0.8rem; border-radius: 3px; margin-bottom: 1rem; }
   .quest-title { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--forest-deep); margin-bottom: 0.3rem; }
@@ -129,7 +128,7 @@
   .quest-features { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
   .quest-card + .quest-card { margin-top: 2rem; }
 
-  /* ── Stone / Carved Tags ── */
+  /* ── Stone Tags — identical to original collapsed ── */
   .quest-features .tag {
     font-family: 'Cinzel', serif;
     font-size: 0.68rem;
@@ -147,7 +146,9 @@
       1px 2px 4px rgba(26,20,12,0.2);
     border: 1px solid rgba(140,125,100,0.4);
     text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+    cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
   }
   .quest-features .tag:hover {
     transform: translateY(-1px);
@@ -155,6 +156,72 @@
       inset 1px 1px 2px rgba(255,255,255,0.35),
       inset -1px -1px 2px rgba(0,0,0,0.15),
       2px 3px 6px rgba(26,20,12,0.25);
+  }
+  .quest-features .tag.active {
+    border-color: var(--amber);
+    background:
+      linear-gradient(145deg, #d4c9b0 0%, #c4b89e 30%, #b8a888 60%, #c4b89e 100%);
+    box-shadow:
+      inset 1px 1px 2px rgba(255,255,255,0.4),
+      inset -1px -1px 2px rgba(0,0,0,0.12),
+      2px 3px 8px rgba(26,20,12,0.22),
+      0 0 0 1px rgba(200,149,46,0.15);
+    transform: translateY(-1px);
+    z-index: 11;
+  }
+
+  /* ── Tag Popover ── */
+  .tag-popover {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: max-content;
+    min-width: 200px;
+    max-width: 300px;
+    background:
+      linear-gradient(160deg, #d9ceb5 0%, #c9bfa8 40%, #bfb498 70%, #c9bfa8 100%);
+    border: 1px solid var(--amber);
+    border-radius: 4px;
+    box-shadow:
+      inset 1px 1px 3px rgba(255,255,255,0.3),
+      inset -1px -1px 2px rgba(0,0,0,0.08),
+      3px 5px 14px rgba(26,20,12,0.28),
+      0 0 0 1px rgba(200,149,46,0.1);
+    padding: 0.65rem 0.8rem;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  /* Arrow nub */
+  .tag-popover::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 16px;
+    width: 8px;
+    height: 8px;
+    background: #d4c9b0;
+    border-left: 1px solid var(--amber);
+    border-top: 1px solid var(--amber);
+    transform: rotate(45deg);
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3);
+  }
+  .tag-popover.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .tag-popover-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    font-style: italic;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--ink-soft);
+    text-shadow: none;
   }
 
   /* ── Training Grounds ── */
@@ -227,14 +294,13 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── Dandelion canvas ── */
   #dandelion-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
-  /* ── Responsive ── */
   @media (max-width: 768px) {
     nav { gap: 1rem; font-size: 0.72rem; padding: 0.5rem 1rem; }
     section { padding: 3rem 1.2rem; }
     .quest-card { padding: 1.5rem; }
+    .tag-popover { max-width: 260px; min-width: 180px; }
   }
 </style>
 </head>
@@ -242,7 +308,6 @@
 
 <canvas id="dandelion-canvas"></canvas>
 
-<!-- Email Popup -->
 <div class="email-overlay" id="emailOverlay">
   <div class="email-popup">
     <button class="email-popup-close" id="emailClose">✕</button>
@@ -317,28 +382,18 @@
       <div class="quest-subtitle">Action Game · Godot · Sole Programmer</div>
       <p class="quest-desc">A team project where I served as the <strong>sole programmer</strong>. The player lands on an island, fights through robot enemies, clears a Data Center dungeon, and faces a final boss. Built with a focus on tight gameplay feel and designer-friendly systems.</p>
       <div class="quest-features">
-        <span class="tag">Responsive Player Controller</span>
-        <span class="tag">Enemy AI Behaviour</span>
-        <span class="tag">Ability System</span>
-        <span class="tag">Resource Management</span>
-        <span class="tag">Hit Detection &amp; Registration</span>
-        <span class="tag">Animation State Machine</span>
-        <span class="tag">Real-time VFX</span>
+        <span class="tag" data-desc="Coyote time (grace frames after leaving a ledge), input buffering for queued attacks, momentum-based movement, and tuned acceleration curves for a responsive, forgiving feel.">Responsive Player Controller</span>
+        <span class="tag" data-desc="Finite State Machine with Idle, Chase, Attack, AttackIdle, and Death states. Uses hysteresis (dual-threshold distances) to prevent state flickering. Line-of-sight raycasting for detection, group alert propagation to notify nearby enemies, and distance-based respawn logic.">Enemy AI Behaviour</span>
+        <span class="tag" data-desc="Energy-costed abilities — Laser (low cooldown, sustained beam), Magnetic Pulse (AoE pull that groups enemies), and Shield — each with independent cooldown timers and energy cost requirements. Designed as modular, data-driven components.">Ability System</span>
+        <span class="tag" data-desc="Health, Stamina (consumed by dodges and fast movement), and Energy (consumed by abilities). Each resource tracks base max, current max, current value, and active buffs — supporting temporary modifiers and regeneration.">Resource Management</span>
+        <span class="tag" data-desc="Hitbox/Hurtbox separation — each attack spawns a dedicated hitbox scene with its own shape, lifetime, and damage data. Invincibility frames (i-frames) are triggered by the movement component during dodge rolls, temporarily disabling hurtbox collision.">Hit Detection &amp; Registration</span>
+        <span class="tag" data-desc="No blend trees — a signal-driven approach where gameplay components emit state signals to a dedicated animation controller script, keeping transition logic decoupled from the AnimationPlayer. Clean separation of gameplay state and visual feedback.">Animation State Machine</span>
+        <span class="tag" data-desc="GPU particle systems with custom shaders, shader-driven materials for stylised surfaces, camera shake on heavy attacks (screen trauma), and directional recoil on ranged hits. Authored in Godot's visual shader editor and GDScript.">Real-time VFX</span>
       </div>
       <div class="media-placeholder">
         <div class="icon">🎬</div>GAMEPLAY FOOTAGE
         <span>Replace this with a video embed or GIF of The Moloch Engine</span>
       </div>
-      <!--
-        TO ADD YOUR VIDEO: Replace the .media-placeholder div above with:
-        <div style="width:100%; aspect-ratio:16/9; margin-top:1.5rem; border-radius:6px; overflow:hidden;">
-          <iframe width="100%" height="100%" src="YOUR_YOUTUBE_EMBED_URL" frameborder="0" allowfullscreen></iframe>
-        </div>
-      -->
-      <!--
-      <a href="#" class="quest-link" target="_blank">View on GitHub →
-      <!-- TODO: Replace # with your actual GitHub repo link </a>
-      -->
     </div>
 
     <div class="quest-card">
@@ -347,10 +402,10 @@
       <div class="quest-subtitle">3D Graphics · JavaScript · p5.js</div>
       <p class="quest-desc">A from-scratch <strong>3D rendering exercise</strong> built without a game engine or graphics library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong> to hide non-visible faces, and <strong>per-face lighting</strong> calculated via the dot product between face normals and a directional light vector. Includes an interactive widget to adjust the light direction in real time.</p>
       <div class="quest-features">
-        <span class="tag">Perspective Projection</span>
-        <span class="tag">Back-face Culling</span>
-        <span class="tag">Dot Product Lighting</span>
-        <span class="tag">Interactive Light Direction</span>
+        <span class="tag" data-desc="Manual 3D-to-2D projection using a virtual camera and field-of-view — dividing X and Y by Z depth to simulate foreshortening, implemented from scratch without any 3D library.">Perspective Projection</span>
+        <span class="tag" data-desc="Calculates each face's surface normal and compares it against the camera direction — faces pointing away from the viewer are discarded before rasterisation, a core real-time rendering optimisation.">Back-face Culling</span>
+        <span class="tag" data-desc="Per-face diffuse shading computed as the dot product between the face normal and a directional light vector (Lambertian reflectance), giving each face a brightness proportional to its angle to the light source.">Dot Product Lighting</span>
+        <span class="tag" data-desc="A UI widget that lets the user adjust the light direction vector in real time, with the shading updating every frame — useful for understanding how surface normals interact with light in a rendering pipeline.">Interactive Light Direction</span>
       </div>
       <div class="demo-embed square">
         <iframe src="https://editor.p5js.org/OrdnaeLP/embed/lDMT3DIpk" scrolling="no" frameborder="0" allowfullscreen></iframe>
@@ -363,10 +418,10 @@
       <div class="quest-subtitle">Interactive Simulation · JavaScript · p5.js</div>
       <p class="quest-desc">An interactive <strong>particle system</strong> that converts text into hundreds of individual points, each with its own physics. Supports two modes: a <strong>magnifying glass</strong> that reveals hidden text by easing nearby particles toward their letter positions, and a <strong>vortex repulsion</strong> mode where arranged text scatters when the cursor approaches — demonstrating <strong>spatial queries</strong>, force-based movement, and target-seeking behaviour.</p>
       <div class="quest-features">
-        <span class="tag">Particle System</span>
-        <span class="tag">Force-based Physics</span>
-        <span class="tag">Spatial Interaction</span>
-        <span class="tag">Input-driven Behaviour</span>
+        <span class="tag" data-desc="A custom emitter that spawns hundreds of particles from rasterised text pixel data, each maintaining independent position, velocity, and target — a common pattern in game engines and motion graphics.">Particle System</span>
+        <span class="tag" data-desc="Per-particle force accumulation with attraction (target-seeking via steering forces), repulsion (inverse-square falloff from cursor), damping, and velocity integration — the same force model used in gameplay physics and flocking simulations.">Force-based Physics</span>
+        <span class="tag" data-desc="Distance-based spatial queries between the cursor and each particle, determining which particles fall within the interaction radius — a simplified version of the broad-phase checks used in collision detection.">Spatial Interaction</span>
+        <span class="tag" data-desc="Two distinct interaction modes driven by mouse input: magnify (reveal) applies easing toward letter targets, while vortex (scatter) applies radial repulsion — demonstrating how input context can switch behaviour at runtime.">Input-driven Behaviour</span>
       </div>
       <div class="demo-embed square">
         <iframe src="https://editor.p5js.org/OrdnaeLP/embed/H83muOp0w" scrolling="no" frameborder="0" allowfullscreen></iframe>
@@ -380,34 +435,22 @@
       </div>
       <div class="training-grid">
         <div class="training-card">
-          <div class="training-thumb">
-            <!-- TODO: Replace with <img src="images/pong.png" alt="Pong"> -->
-            <div class="thumb-placeholder">🏓</div>
-          </div>
+          <div class="training-thumb"><div class="thumb-placeholder">🏓</div></div>
           <div class="training-title">Pong</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
-          <div class="training-thumb">
-            <!-- TODO: Replace with <img src="images/breakout.png" alt="BreakOut"> -->
-            <div class="thumb-placeholder">🧱</div>
-          </div>
+          <div class="training-thumb"><div class="thumb-placeholder">🧱</div></div>
           <div class="training-title">BreakOut</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
-          <div class="training-thumb">
-            <!-- TODO: Replace with <img src="images/platformer.png" alt="Platform Jumper"> -->
-            <div class="thumb-placeholder">🍄</div>
-          </div>
+          <div class="training-thumb"><div class="thumb-placeholder">🍄</div></div>
           <div class="training-title">Platform Jumper</div>
           <div class="training-lang">C# · Unity</div>
         </div>
         <div class="training-card">
-          <div class="training-thumb">
-            <!-- TODO: Replace with <img src="images/polyomino.png" alt="Polyomino"> -->
-            <div class="thumb-placeholder">🧩</div>
-          </div>
+          <div class="training-thumb"><div class="thumb-placeholder">🧩</div></div>
           <div class="training-title">Polyomino</div>
           <div class="training-lang">C# · Unity</div>
         </div>
@@ -471,6 +514,76 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Expandable Tag Popovers ──
+  (() => {
+    let activeTag = null;
+    let activePopover = null;
+
+    function closeActive() {
+      if (activePopover) {
+        const pop = activePopover;
+        pop.classList.remove('visible');
+        setTimeout(() => pop.remove(), 200);
+      }
+      if (activeTag) activeTag.classList.remove('active');
+      activeTag = null;
+      activePopover = null;
+    }
+
+    function openTag(tag) {
+      const desc = tag.dataset.desc;
+      if (!desc) return;
+
+      const popover = document.createElement('div');
+      popover.className = 'tag-popover';
+      popover.innerHTML = '<div class="tag-popover-text">' + desc + '</div>';
+
+      tag.appendChild(popover);
+      tag.classList.add('active');
+
+      // Position check: nudge left if overflowing the card
+      requestAnimationFrame(() => {
+        popover.classList.add('visible');
+        const popRect = popover.getBoundingClientRect();
+        const card = tag.closest('.quest-card') || tag.closest('section');
+        const cardRect = card.getBoundingClientRect();
+
+        // If it overflows right edge of card
+        if (popRect.right > cardRect.right - 12) {
+          const overflow = popRect.right - cardRect.right + 12;
+          popover.style.left = (-overflow) + 'px';
+          // Shift the arrow to stay centered above the tag
+          const arrowPos = overflow + tag.offsetWidth * 0.35;
+          popover.style.setProperty('--arrow-offset', arrowPos + 'px');
+        }
+        // If it overflows left edge
+        if (popRect.left < cardRect.left + 8) {
+          const fix = cardRect.left + 8 - popRect.left;
+          const currentLeft = parseFloat(popover.style.left) || 0;
+          popover.style.left = (currentLeft + fix) + 'px';
+          const arrowPos = tag.offsetWidth * 0.35 - fix;
+          popover.style.setProperty('--arrow-offset', Math.max(12, arrowPos) + 'px');
+        }
+      });
+
+      activeTag = tag;
+      activePopover = popover;
+
+      popover.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    document.querySelectorAll('.quest-features .tag[data-desc]').forEach(tag => {
+      tag.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasActive = tag === activeTag;
+        closeActive();
+        if (!wasActive) openTag(tag);
+      });
+    });
+
+    document.addEventListener('click', closeActive);
+  })();
 
   // ── Email Popup ──
   (() => {
