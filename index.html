@@ -398,12 +398,14 @@
 
     <div class="quest-card">
       <div class="quest-badge">◆ Side Quest</div>
-      <div class="quest-title">3D Cube Renderer</div>
+      <div class="quest-title">3D Renderer</div>
       <div class="quest-subtitle">3D Graphics · JavaScript · p5.js</div>
-      <p class="quest-desc">A from-scratch <strong>3D rendering exercise</strong> built without a game engine or graphics library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong> to hide non-visible faces, and <strong>per-face lighting</strong> calculated via the dot product between face normals and a directional light vector. Includes an interactive widget to adjust the light direction in real time.</p>
+      <p class="quest-desc">A from-scratch <strong>3D rendering pipeline</strong> built without a game engine or 3D library. Implements <strong>perspective projection</strong>, real-time rotation, <strong>back-face culling</strong>, <strong>painter's algorithm</strong> depth sorting, and <strong>per-face Lambertian shading</strong> via dot-product lighting. Supports multiple mesh types and includes an interactive light-direction widget — all UI drawn directly on the canvas.</p>
       <div class="quest-features">
         <span class="tag" data-desc="Manual 3D-to-2D projection — dividing world-space coordinates by Z depth to produce foreshortening. Implemented from scratch with no graphics library.">Perspective Projection</span>
         <span class="tag" data-desc="Surface normal comparison against the view direction to discard rear-facing polygons before rasterisation — a standard real-time rendering optimisation.">Back-face Culling</span>
+        <span class="tag" data-desc="Back-to-front face sorting by average Z-depth, ensuring correct draw order without a depth buffer — the classic pre-GPU visibility solution.">Painter's Algorithm</span>
+        <span class="tag" data-desc="Runtime-switchable geometry definitions (hexahedron, triangular prism, octahedron) sharing the same projection and shading pipeline.">Multiple Mesh Types</span>
         <span class="tag" data-desc="Per-face Lambertian diffuse shading via the dot product between face normals and a directional light vector.">Dot Product Lighting</span>
         <span class="tag" data-desc="Runtime-adjustable light direction vector with per-frame shading recalculation, demonstrating how surface normals interact with directional lighting.">Interactive Light Direction</span>
       </div>
