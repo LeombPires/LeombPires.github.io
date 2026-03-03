@@ -128,7 +128,7 @@
   .quest-features { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
   .quest-card + .quest-card { margin-top: 2rem; }
 
-  /* ── Stone Tags — identical to original collapsed ── */
+  /* ── Stone Tags ── */
   .quest-features .tag {
     font-family: 'Cinzel', serif;
     font-size: 0.68rem;
@@ -194,7 +194,6 @@
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  /* Arrow nub */
   .tag-popover::before {
     content: '';
     position: absolute;
@@ -231,13 +230,12 @@
   .training-subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.9rem; color: var(--ink-soft); opacity: 0.7; }
   .training-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
   @media (max-width: 600px) { .training-grid { grid-template-columns: repeat(2, 1fr); } }
-  .training-card { background: rgba(26,58,42,0.04); border: 1px solid rgba(160,116,36,0.15); border-radius: 6px; padding: 0.6rem; text-align: center; transition: border-color 0.3s; }
-  .training-card:hover { border-color: var(--amber); }
+  .training-card { background: rgba(26,58,42,0.04); border: 1px solid rgba(160,116,36,0.15); border-radius: 6px; padding: 0.6rem; text-align: center; transition: border-color 0.3s, transform 0.2s; cursor: pointer; }
+  .training-card:hover { border-color: var(--amber); transform: translateY(-2px); }
   .training-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 4px; overflow: hidden; margin-bottom: 0.5rem; background: linear-gradient(135deg, rgba(26,58,42,0.08), rgba(200,149,46,0.06)); display: flex; align-items: center; justify-content: center; }
   .training-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .training-thumb .thumb-placeholder { font-size: 1.8rem; opacity: 0.3; }
   .training-title { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--forest-deep); margin-bottom: 0.25rem; }
-  .training-lang { font-family: 'Crimson Pro', serif; font-size: 0.75rem; color: var(--bark-light); font-style: italic; }
 
   /* ── Demo Embeds ── */
   .demo-embed { margin-top: 1.5rem; border-radius: 6px; overflow: hidden; border: 2px solid var(--amber-dim); background: var(--forest-deep); }
@@ -290,6 +288,18 @@
   .email-popup-close { position: absolute; top: 0.6rem; right: 0.8rem; background: none; border: none; font-size: 1.3rem; color: var(--bark-light); cursor: pointer; padding: 0.2rem; line-height: 1; transition: color 0.2s; }
   .email-popup-close:hover { color: var(--ink); }
 
+  /* ── Game Popup ── */
+  .game-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 38, 26, 0.8); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; }
+  .game-overlay.active { display: flex; }
+  .game-popup { background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%); border: 2px solid var(--amber); border-radius: 8px; padding: 1.5rem; text-align: center; position: relative; max-width: 660px; width: 95%; box-shadow: 0 12px 50px rgba(0,0,0,0.5); }
+  .game-popup::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); border-radius: 8px 8px 0 0; }
+  .game-popup-close { position: absolute; top: 0.6rem; right: 0.8rem; background: none; border: none; font-size: 1.3rem; color: var(--bark-light); cursor: pointer; padding: 0.2rem; line-height: 1; transition: color 0.2s; z-index: 2; }
+  .game-popup-close:hover { color: var(--ink); }
+  .game-popup-title { font-family: 'Cinzel Decorative', serif; font-size: 1.15rem; color: var(--forest-deep); margin-bottom: 0.3rem; }
+  .game-popup-subtitle { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.82rem; color: var(--bark-light); margin-bottom: 1rem; }
+  .game-popup-frame { width: 100%; max-width: 600px; aspect-ratio: 1 / 1; margin: 0 auto; border-radius: 6px; overflow: hidden; border: 2px solid var(--amber-dim); background: var(--forest-deep); }
+  .game-popup-frame iframe { display: block; width: 100%; height: 100%; border: none; }
+
   /* ── Scroll animations ── */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -301,6 +311,7 @@
     section { padding: 3rem 1.2rem; }
     .quest-card { padding: 1.5rem; }
     .tag-popover { max-width: 260px; min-width: 180px; }
+    .game-popup { padding: 1rem; }
   }
 </style>
 </head>
@@ -308,6 +319,7 @@
 
 <canvas id="dandelion-canvas"></canvas>
 
+<!-- Email Popup -->
 <div class="email-overlay" id="emailOverlay">
   <div class="email-popup">
     <button class="email-popup-close" id="emailClose">✕</button>
@@ -315,6 +327,18 @@
     <div class="email-popup-subtitle">Reach me at</div>
     <div class="email-popup-address">leombpires@gmail.com</div>
     <button class="email-popup-copy" id="emailCopy">Copy to Clipboard</button>
+  </div>
+</div>
+
+<!-- Game Popup -->
+<div class="game-overlay" id="gameOverlay">
+  <div class="game-popup">
+    <button class="game-popup-close" id="gameClose">✕</button>
+    <div class="game-popup-title" id="gamePopupTitle">Game Title</div>
+    <div class="game-popup-subtitle">Training Grounds · Click to play</div>
+    <div class="game-popup-frame">
+      <iframe id="gameIframe" src="" scrolling="no" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -436,25 +460,21 @@
         <p class="training-subtitle">Learning exercises built while studying game development fundamentals</p>
       </div>
       <div class="training-grid">
-        <div class="training-card">
-          <div class="training-thumb"><div class="thumb-placeholder">🏓</div></div>
-          <div class="training-title">Pong</div>
-          <div class="training-lang">C# · Unity</div>
+        <div class="training-card" data-game-title="Grove Runner" data-game-src="https://editor.p5js.org/OrdnaeLP/embed/HTwQYIugh">
+          <div class="training-thumb"><img src="Grove Runner.png" alt="Grove Runner"></div>
+          <div class="training-title">Grove Runner</div>
         </div>
-        <div class="training-card">
-          <div class="training-thumb"><div class="thumb-placeholder">🧱</div></div>
-          <div class="training-title">BreakOut</div>
-          <div class="training-lang">C# · Unity</div>
+        <div class="training-card" data-game-title="Breakin'" data-game-src="https://editor.p5js.org/OrdnaeLP/embed/cRfdG1p9k">
+          <div class="training-thumb"><img src="Breakin.png" alt="Breakin'"></div>
+          <div class="training-title">Breakin'</div>
         </div>
-        <div class="training-card">
-          <div class="training-thumb"><div class="thumb-placeholder">🍄</div></div>
-          <div class="training-title">Platform Jumper</div>
-          <div class="training-lang">C# · Unity</div>
+        <div class="training-card" data-game-title="Slydering Serpent" data-game-src="https://editor.p5js.org/OrdnaeLP/embed/EEWRUjwkr">
+          <div class="training-thumb"><img src="Slydering Serpent.png" alt="Slydering Serpent"></div>
+          <div class="training-title">Slydering Serpent</div>
         </div>
-        <div class="training-card">
-          <div class="training-thumb"><div class="thumb-placeholder">🧩</div></div>
-          <div class="training-title">Polyomino</div>
-          <div class="training-lang">C# · Unity</div>
+        <div class="training-card" data-game-title="Flappy Square" data-game-src="https://editor.p5js.org/OrdnaeLP/embed/BJ5706xGn">
+          <div class="training-thumb"><img src="Flappy Square.png" alt="Flappy Square"></div>
+          <div class="training-title">Flappy Square</div>
         </div>
       </div>
     </div>
@@ -544,22 +564,18 @@
       tag.appendChild(popover);
       tag.classList.add('active');
 
-      // Position check: nudge left if overflowing the card
       requestAnimationFrame(() => {
         popover.classList.add('visible');
         const popRect = popover.getBoundingClientRect();
         const card = tag.closest('.quest-card') || tag.closest('section');
         const cardRect = card.getBoundingClientRect();
 
-        // If it overflows right edge of card
         if (popRect.right > cardRect.right - 12) {
           const overflow = popRect.right - cardRect.right + 12;
           popover.style.left = (-overflow) + 'px';
-          // Shift the arrow to stay centered above the tag
           const arrowPos = overflow + tag.offsetWidth * 0.35;
           popover.style.setProperty('--arrow-offset', arrowPos + 'px');
         }
-        // If it overflows left edge
         if (popRect.left < cardRect.left + 8) {
           const fix = cardRect.left + 8 - popRect.left;
           const currentLeft = parseFloat(popover.style.left) || 0;
@@ -604,6 +620,37 @@
         setTimeout(() => { copyBtn.textContent = 'Copy to Clipboard'; copyBtn.classList.remove('copied'); }, 2000);
       });
     });
+  })();
+
+  // ── Game Popup ──
+  (() => {
+    const overlay = document.getElementById('gameOverlay');
+    const closeBtn = document.getElementById('gameClose');
+    const titleEl = document.getElementById('gamePopupTitle');
+    const iframe = document.getElementById('gameIframe');
+
+    function openGame(title, src) {
+      titleEl.textContent = title;
+      iframe.src = src;
+      overlay.classList.add('active');
+    }
+
+    function closeGame() {
+      overlay.classList.remove('active');
+      // Clear iframe src after transition to stop the game
+      setTimeout(() => { iframe.src = ''; }, 300);
+    }
+
+    // Attach click to each training card
+    document.querySelectorAll('.training-card[data-game-src]').forEach(card => {
+      card.addEventListener('click', () => {
+        openGame(card.dataset.gameTitle, card.dataset.gameSrc);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeGame);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeGame(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('active')) closeGame(); });
   })();
 
   // ── Dandelion Animation ──
