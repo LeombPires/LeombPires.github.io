@@ -307,11 +307,15 @@
   #dandelion-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
   @media (max-width: 768px) {
-    nav { gap: 1rem; font-size: 0.72rem; padding: 0.5rem 1rem; }
+    nav { gap: 0; font-size: 0.72rem; padding: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; scrollbar-width: none; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { padding: 0.6rem 0.75rem; white-space: nowrap; flex-shrink: 0; }
     section { padding: 3rem 1.2rem; }
     .quest-card { padding: 1.5rem; }
     .tag-popover { max-width: 260px; min-width: 180px; }
     .game-popup { padding: 1rem; }
+    #dandelion-canvas { display: none !important; }
+    .vine-left, .vine-right { display: none; }
   }
 </style>
 </head>
@@ -391,9 +395,9 @@
     <div class="skills-grid">
       <div class="skill-bar"><div class="label">Gameplay Programming <span class="skill-tag">Controllers / AI / Systems</span></div><div class="bar-track"><div class="bar-fill amber" data-width="70%"></div></div></div>
       <div class="skill-bar"><div class="label">Tools Programming <span class="skill-tag">Editor Tools / Pipelines</span></div><div class="bar-track"><div class="bar-fill amber" data-width="55%"></div></div></div>
+      <div class="skill-bar"><div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div><div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div></div>
       <div class="skill-bar"><div class="label">Git <span class="skill-tag">Version Control</span></div><div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div></div>
       <div class="skill-bar"><div class="label">Team Collaboration <span class="skill-tag">Lab & Game Dev</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
-      <div class="skill-bar"><div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div><div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div></div>
     </div>
   </section>
 
