@@ -380,8 +380,8 @@
     <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
     <div class="skills-grid">
       <div class="skill-bar"><div class="label">C# <span class="skill-tag">Unity</span></div><div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div></div>
-      <div class="skill-bar"><div class="label">JavaScript <span class="skill-tag">p5.js / Canvas</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
-      <div class="skill-bar"><div class="label">GDScript <span class="skill-tag">Godot</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
+      <div class="skill-bar"><div class="label">GDScript <span class="skill-tag">Godot</span></div><div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div></div>
+      <div class="skill-bar"><div class="label">JavaScript <span class="skill-tag">p5.js / Canvas</span></div><div class="bar-track"><div class="bar-fill green" data-width="70%"></div></div></div>
     </div>
   </section>
 
@@ -391,8 +391,9 @@
     <div class="skills-grid">
       <div class="skill-bar"><div class="label">Gameplay Programming <span class="skill-tag">Controllers / AI / Systems</span></div><div class="bar-track"><div class="bar-fill amber" data-width="70%"></div></div></div>
       <div class="skill-bar"><div class="label">Tools Programming <span class="skill-tag">Editor Tools / Pipelines</span></div><div class="bar-track"><div class="bar-fill amber" data-width="55%"></div></div></div>
-      <div class="skill-bar"><div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div><div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div></div>
+      <div class="skill-bar"><div class="label">Git <span class="skill-tag">Version Control</span></div><div class="bar-track"><div class="bar-fill green" data-width="90%"></div></div></div>
       <div class="skill-bar"><div class="label">Team Collaboration <span class="skill-tag">Lab & Game Dev</span></div><div class="bar-track"><div class="bar-fill green" data-width="80%"></div></div></div>
+      <div class="skill-bar"><div class="label">Real-time VFX <span class="skill-tag">Visual Effects</span></div><div class="bar-track"><div class="bar-fill ruby" data-width="50%"></div></div></div>
     </div>
   </section>
 
@@ -400,7 +401,7 @@
     <div class="section-title">Quest Log</div>
     <div class="section-ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
-    <div class="quest-card">
+    <div class="quest-card" id="molochCard">
       <div class="quest-badge">★ Main Quest</div>
       <div class="quest-title">The Moloch Engine</div>
       <div class="quest-subtitle">Action Game · Godot · Sole Programmer</div>
@@ -592,6 +593,9 @@
       popover.addEventListener('click', (e) => e.stopPropagation());
     }
 
+    // Expose openTag and closeActive so the auto-open observer can use them
+    window._tagPopover = { openTag, closeActive };
+
     document.querySelectorAll('.quest-features .tag[data-desc]').forEach(tag => {
       tag.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -602,6 +606,34 @@
     });
 
     document.addEventListener('click', closeActive);
+  })();
+
+  // ── Auto-open first tag of Moloch Engine on scroll ──
+  (() => {
+    const molochCard = document.getElementById('molochCard');
+    if (!molochCard) return;
+    const firstTag = molochCard.querySelector('.quest-features .tag[data-desc]');
+    if (!firstTag) return;
+
+    let hasAutoOpened = false;
+
+    const questObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !hasAutoOpened) {
+          hasAutoOpened = true;
+          // Small delay so the reveal animation finishes first
+          setTimeout(() => {
+            if (window._tagPopover) {
+              window._tagPopover.closeActive();
+              window._tagPopover.openTag(firstTag);
+            }
+          }, 900);
+          questObserver.unobserve(molochCard);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    questObserver.observe(molochCard);
   })();
 
   // ── Email Popup ──
